@@ -149,10 +149,10 @@ export const handler = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        body: JSON.stringify({
-          paths,
-        }),
       },
+      body: JSON.stringify({
+        paths,
+      }),
     });
   }
 
