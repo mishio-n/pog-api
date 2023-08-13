@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum GenderCategory {
+  MALE
+  FEMALE
+}
+
+enum Region {
+  MIHO
+  RITTO
+  NRA
+}
+
+enum Course {
+  TURF
+  DART
+}
+
+enum Grade {
+  CLASSIC
+  G1
+  G2
+  G3
+  NORMAL
+}
+
+model Season {
+  id       Int     @id @default(autoincrement())
+  name     String
+  owner    Owner[]
+  isActive Boolean @default(true)
+}
+
+model Rule {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  isOdds      Boolean
+  isDart      Boolean
+  owner       Owner[]
+}
+
+model Owner {
+  id       Int     @id @default(autoincrement())
+  name     String
+  seasonId Int
+  season   Season  @relation(fields: [seasonId], references: [id])
+  ruleId   Int
+  rule     Rule    @relation(fields: [ruleId], references: [id])
+  horses   Horse[]
+}
+
+model Horse {
+  id             Int            @id @default(autoincrement())
+  name           String
+  races           Race[]
+  url            String
+  genderCategory GenderCategory
+  stable         String
+  region         Region
+  owners         Owner[]
+  inStable       Boolean        @default(false)
+}
+
+model Race {
+  id      Int    @id @default(autoincrement())
+  name    String
+  odds    Float
+  point   Int
+  result  Int
+  horse   Horse  @relation(fields: [horseId], references: [id])
+  horseId Int
+  date    String
+  url     String
+  course  Course
+  grade   Grade
+}

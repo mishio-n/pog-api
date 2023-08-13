@@ -1,0 +1,22 @@
+{
+  "name": "pog-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.1.1",
+    "node-fetch": "^3.3.2",
+    "puppeteer": "^21.0.3",
+    "ts-pattern": "^5.0.5"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.119",
+    "@types/node": "^20.4.10",
+    "esbuild": "^0.19.1",
+    "prisma": "^5.1.1",
+    "typescript": "^5.1.6"
+  }
+}
